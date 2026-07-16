@@ -61,18 +61,26 @@ Computer Engineering Student | Python Developer | Machine Learning Enthusiast
 
 This project is created for educational purposes.
 ## 🏗️ Project Architecture
+
 ```mermaid
-flowchart LR
-    A[User] --> B[Flask Web Application]
-    B --> C[Spam Detection Module]
-    C --> D[TF-IDF Vectorizer]
-    D --> E[Naive Bayes Model]
-    E --> F[Spam / Not Spam Result]
+flowchart TD
 
-    B --> G[AI Cyber Assistant]
-    G --> H[Groq API]
-    H --> I[Cybersecurity Response]
+A[👤 User] --> B[🌐 Flask Web Interface]
 
-    F --> J[Display Result]
-    I --> J
+B --> C{Select Feature}
+
+C --> D[📧 Spam Detector]
+C --> E[🤖 AI Cyber Assistant]
+
+D --> F[✉️ User Email Input]
+F --> G[🔤 TF-IDF Vectorizer]
+G --> H[🧠 Naive Bayes Model]
+H --> I[✅ Spam / Not Spam Prediction]
+
+E --> J[💬 User Question]
+J --> K[🔑 Groq API]
+K --> L[🤖 AI Response]
+
+I --> M[📱 Display Result]
+L --> M
 ```
