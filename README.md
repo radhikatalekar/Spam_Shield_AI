@@ -60,3 +60,19 @@ Computer Engineering Student | Python Developer | Machine Learning Enthusiast
 ## 📄 License
 
 This project is created for educational purposes.
+## 🏗️ Project Architecture
+```mermaid
+flowchart LR
+    A[User] --> B[Flask Web Application]
+    B --> C[Spam Detection Module]
+    C --> D[TF-IDF Vectorizer]
+    D --> E[Naive Bayes Model]
+    E --> F[Spam / Not Spam Result]
+
+    B --> G[AI Cyber Assistant]
+    G --> H[Groq API]
+    H --> I[Cybersecurity Response]
+
+    F --> J[Display Result]
+    I --> J
+```
