@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Shield AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+<i class="fa-solid fa-shield-virus"></i>
+<span>Spam Shield AI</span>
+</div>
+<ul>
+    <li><a href="#">🏠 Home</a></li>
+    <li><a href="#detector">📧 Spam Detector</a></li>
+    <li><a href="#team">👨‍💻 Developer</a></li>
+    <li><a href="#" onclick="toggleChat()">🤖 AI Assistant</a></li>
+</ul>
+</nav>
+
+<section class="hero" id="detector">
+
+<div class="glass-card">
+
+<h1>AI Powered Email Spam Detection</h1>
+
+<p>
+Analyze emails instantly using Machine Learning and identify spam messages with high accuracy.
+</p>
+
+<form action="/predict" method="POST">
+
+<textarea
+name="message"
+placeholder="Paste your email message here..."
+required></textarea>
+
+<button type="submit">
+<i class="fa-solid fa-magnifying-glass"></i>
+Analyze Email
+</button>
+
+</form>
+
+{% if prediction %}
+
+<div class="result">
+
+<h2>{{ prediction }}</h2>
+
+</div>
+
+{% endif %}
+<!-- Features Section -->
+
+</div>
+
+</section>
+
+<section class="features">
+
+<div class="feature-card">
+<i class="fa-solid fa-robot"></i>
+<h3>AI Detection</h3>
+<p>Advanced Machine Learning model to detect spam emails accurately.</p>
+</div>
+
+<div class="feature-card">
+<i class="fa-solid fa-shield-halved"></i>
+<h3>Secure Analysis</h3>
+<p>Your email is analyzed securely and prediction is generated instantly.</p>
+</div>
+
+<div class="feature-card">
+<i class="fa-solid fa-bolt"></i>
+<h3>Fast Prediction</h3>
+<p>Get spam detection results in less than a second.</p>
+</div>
+
+</section>
+
+<section class="team" id="team">
+
+<h2>Developer</h2>
+
+<div class="member">
+    <h3>Radhika Talekar</h3>
+    <p>Machine Learning Engineer | Python Developer | Flask Developer</p>
+</div>
+
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 Spam Shield AI</p>
+
+<p>Developed by Radhika Talekar </p>
+
+</footer>
+<!-- Small Chatbot Popup -->
+<div class="chat-popup" id="chatPopup">
+
+    <div class="chat-header">
+        🤖 AI Assistant
+        <span onclick="toggleChat()">✖</span>
+    </div>
+
+    <div id="chat-box"></div>
+
+    <div class="chat-input">
+
+        <input
+            type="text"
+            id="user-input"
+            placeholder="Ask...">
+
+        <button onclick="sendMessage()">➤</button>
+
+    </div>
+
+</div>
+<!-- Floating AI Button -->
+<div class="chat-icon" onclick="toggleChat()">
+    🤖
+</div>
+<script>
+
+function toggleChat(){
+
+    let popup=document.getElementById("chatPopup");
+
+    if(popup.style.display==="block"){
+        popup.style.display="none";
+    }else{
+        popup.style.display="block";
+    }
+
+}
+
+async function sendMessage(){
+
+    let input=document.getElementById("user-input");
+
+    let message=input.value.trim();
+
+    if(message==="") return;
+
+    let chat=document.getElementById("chat-box");
+
+    chat.innerHTML += "<p><b>You:</b> "+message+"</p>";
+
+    input.value="";
+
+    const response=await fetch("/chat",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            message:message
+        })
+
+    });
+
+    const data=await response.json();
+
+    chat.innerHTML += "<p><b>AI:</b> "+data.reply+"</p>";
+
+    chat.scrollTop=chat.scrollHeight;
+
+}
+
+</script>
+</body>
+
+</html>
